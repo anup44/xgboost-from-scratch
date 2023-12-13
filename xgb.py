@@ -7,9 +7,9 @@ from typing import List
 
 class Node(object):
     def __init__(self, parent: Node, num_samples, is_left=False):
-        self.parent = parent
-        self.left_child = None
-        self.right_child = None
+        self.parent: Node = parent
+        self.left_child: Node
+        self.right_child: Node
         self.is_left = None
         self.weight = None
         self.split_feature = None
@@ -200,7 +200,7 @@ class XGBoost(object):
         self.num_features = num_features
         self.approximate = approximate
         self.lmbd = lmbd
-        self.learners: List[Tree] = []
+        self.learners: List[Tree]
         self.obj = obj
         self.eps = eps
         self.case_weights = case_weights if case_weights is not None else 1.0
@@ -213,7 +213,7 @@ class XGBoost(object):
 
     def train(self, data, verbose=True):
         losses = []
-        self.learners = []
+        self.learners: List[Tree] = []
         predictions = np.zeros((data.num_samples,))
         for i in tqdm(range(self.n_estimators)):
             gradients, hessians = self.calculate_gradients(predictions, data)
